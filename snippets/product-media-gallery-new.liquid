@@ -1,0 +1,82 @@
+{% comment %}
+  Renders a product media gallery with a slider using Swiper.
+  Accepts:
+  - product: {Object} Product liquid object
+  - variant_images: {Array} Product images associated with a variant
+  - is_duplicate: {Boolean} Prevents rendering unneeded elements and duplicate ids for subsequent instances
+  Usage:
+  {% render 'product-media-gallery-slider', is_duplicate: true %}
+{% endcomment %}
+
+{%- liquid
+  # ... (keep the existing Liquid logic as is)
+-%}
+
+<div class="swiper mySwiper swiper-container" id="MediaGallerySlider-{{ section.id }}{{ id_append }}">
+  <div class="swiper-wrapper">
+    {%- if product.selected_or_first_available_variant.featured_media != null -%}
+      {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+      <div class="swiper-slide">
+        {%- assign media_position = 1 -%}
+        {% render 'product-thumbnail',
+          media: featured_media,
+          media_count: media_count,
+          position: media_position,
+          desktop_layout: section.settings.gallery_layout,
+          mobile_layout: section.settings.mobile_thumbnails,
+          loop: section.settings.enable_video_looping,
+          modal_id: section.id,
+          xr_button: true,
+          media_width: media_width,
+          media_fit: section.settings.media_fit,
+          constrain_to_viewport: section.settings.constrain_to_viewport,
+          lazy_load: false
+        %}
+      </div>
+    {%- endif -%}
+    {%- for media in product.media -%}
+      {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+        <div class="swiper-slide">
+          {%- liquid
+            assign media_position = media_position | default: 0 | plus: 1
+            assign lazy_load = false
+            if media_position > 1
+              assign lazy_load = true
+            endif
+          -%}
+          {% render 'product-thumbnail',
+            media: media,
+            media_count: media_count,
+            position: media_position,
+            desktop_layout: section.settings.gallery_layout,
+            mobile_layout: section.settings.mobile_thumbnails,
+            loop: section.settings.enable_video_looping,
+            modal_id: section.id,
+            xr_button: true,
+            media_width: media_width,
+            media_fit: section.settings.media_fit,
+            constrain_to_viewport: section.settings.constrain_to_viewport,
+            lazy_load: lazy_load
+          %}
+        </div>
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+<script>
+  // Initialize Swiper slider
+  var swiper = new Swiper('#MediaGallerySlider-{{ section.id }}{{ id_append }}', {
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
