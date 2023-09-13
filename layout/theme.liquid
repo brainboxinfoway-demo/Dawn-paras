@@ -21,11 +21,11 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
 
-    {% comment %} flickity slier 
+   <!-- flickity slier -->
     <!-- CSS -->
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <!-- JavaScript -->
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script> {% endcomment %}
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
     <title>
       {{ page_title }}
@@ -410,23 +410,7 @@
         recipientFormCollapsed: `{{ 'recipient.form.collapsed' | t }}`,
       };
     </script>
-
-    {% comment %} <script>
-     var = document.querySelector('.carousel');
-      var flkty = new Flickity({
-     
-        cellAlign: 'left',
-        contain: true,
-        wrapAround: true,
-        autoPlay: true,
-        fade: true
-    });
-    // element argument can be a selector string
-    //   for an individual element
-    var flkty = new Flickity( '.carousel', {
-    });
-    </script> {% endcomment %}
-
+    
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
