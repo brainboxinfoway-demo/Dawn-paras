@@ -4,47 +4,18 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "blocks": {
-        "f9c66d4f-86b3-489d-857d-f96ab9fff7a9": {
-          "type": "link_list",
-          "settings": {
-            "heading": "G WORLD",
-            "menu": "g-world"
-          }
-        },
-        "2e8abd68-bb21-42b0-9ca7-55b4e5a149ba": {
-          "type": "link_list",
-          "settings": {
-            "heading": "SHOP ONLINE",
-            "menu": "shop-online"
-          }
-        },
-        "8ebf8188-891a-46fc-84f4-1dc58c1e62ae": {
-          "type": "link_list",
-          "settings": {
-            "heading": "CUSTOMER CARE",
-            "menu": "customer-care"
-          }
-        }
-      },
-      "block_order": [
-        "f9c66d4f-86b3-489d-857d-f96ab9fff7a9",
-        "2e8abd68-bb21-42b0-9ca7-55b4e5a149ba",
-        "8ebf8188-891a-46fc-84f4-1dc58c1e62ae"
-      ],
       "settings": {
-        "show_page_width": true,
         "color_scheme": "background-1",
-        "newsletter_enable": false,
+        "newsletter_enable": true,
         "newsletter_heading": "Subscribe to our emails",
         "enable_follow_on_shop": true,
         "show_social": true,
-        "enable_country_selector": false,
+        "enable_country_selector": true,
         "enable_language_selector": true,
         "payment_enable": true,
         "show_policy": false,
         "margin_top": 0,
-        "padding_top": 80,
+        "padding_top": 36,
         "padding_bottom": 36
       }
     }

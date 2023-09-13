@@ -11,7 +11,7 @@
   }
 
   .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0 | round: 0 }}px;
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
@@ -47,9 +47,8 @@
     or section.settings.show_social and has_social_icons == true
     or section.settings.enable_follow_on_shop
   -%}
-  <div class="footer_inner_wrapper  {% if section.settings.show_page_width %}page-width{% endif %}">
     {%- unless only_empty_brand -%}
-      <div class="footer__content-top">
+      <div class="footer__content-top page-width">
         {%- if section.blocks.size > 0 -%}
           {%- liquid
             if section.blocks.size == 9
@@ -253,7 +252,7 @@
       data-cascade
     {% endif %}
   >
-    <div class="footer__content-bottom-wrapper">
+    <div class="footer__content-bottom-wrapper page-width">
       <div class="footer__column footer__localization isolate">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
           <noscript>
@@ -349,7 +348,7 @@
         {%- endif -%}
       </div>
     </div>
-    <div class="footer__content-bottom-wrapper{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
+    <div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
       <div class="footer__copyright caption">
         <small class="copyright__content"
           >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
@@ -371,7 +370,6 @@
       </div>
     </div>
   </div>
-</div>
 </footer>
 
 {% schema %}
@@ -482,12 +480,6 @@
     }
   ],
   "settings": [
-    {
-      "type":"checkbox",
-      "id":"show_page_width",
-      "label":"Page Width Show/Hide",
-      "default": false
-    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
