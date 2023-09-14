@@ -155,6 +155,18 @@
   .image-with-text.collapse-borders:not(.image-with-text--overlap) .image-with-text__content {
     border-top: 0;
   }
+
+  .image-with-text__text-item.grid__item {
+    order: 1;
+  }
+
+  .image-with-text__media-item {
+    order: 2;
+  }
+
+  .image-with-text__content {
+    padding: 40px 24px 30px;
+  }
 }
 
 .image-with-text__content--mobile-right > * {

@@ -1,0 +1,168 @@
+
+{{ 'text-with-image-slider.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="text-imageslider section-{{ section.id }}-padding" id="section-{{ section.id }}">
+    <div class="text-with-image-slider">
+        <div class="text-with-image_wrapper">
+            <div class="mian-content_wrapper">
+                {%- for block in section.blocks -%}
+                    {%- if block.type == 'text' -%}
+                        <div class="about-content">
+                            {%- if block.settings.title_text != '' -%}
+                                <h2 class="main-title">{{ block.settings.title_text }}</h2>
+                            {%- endif -%}
+
+                            {%- if block.settings.sub_title_text != '' -%}
+                                <h3 class="sub_title">{{ block.settings.sub_title_text }}</h3>
+                            {%- endif -%}
+
+                            {%- if block.settings.description != '' -%}
+                                <div class="about-content-description">
+                                    {{ block.settings.description }}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                    {%- endif -%}
+                {% endfor %}
+            </div>
+            <div class="mian-slider_wrapper">
+               <div class="carousel-new" >
+                    {%- for block in section.blocks -%}
+                        {%- if block.type == 'columnimage' -%}
+                                <div class="carousel-cell">
+                                    {%- if block.settings.image != null -%}
+                                        <img src="{{ block.settings.image | img_url: '800x' }}" alt="Image">
+                                    {%- else -%}
+                                        <div class="image-placeholder">
+                                           {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                        </div>
+                                    {%- endif -%}
+                                </div>
+                        {%- endif -%}
+                    {% endfor %}    
+                    <div>
+                </div>
+            </div>
+    </div>
+</section>
+
+
+<script>
+  
+  
+    if(document.querySelector('.carousel-new')){
+      new Flickity( document.querySelector('.carousel-new'), {
+        // options
+        cellAlign: "left",
+        contain: true,
+        wrapAround: true,
+        /*autoPlay: 5000,*/
+        prevNextButtons: false,
+        pauseAutoPlayOnHover: false,
+        pageDots: false,   
+        draggable: true,       
+        on:{
+          change:function(index){
+            let flkty = Flickity.data( document.querySelector('.carousel-cell') );
+            flkty.select(index);
+          }
+        }
+      });
+    }
+    
+</script>
+{% schema %}
+{
+  "name": "text with image slider",
+  "class": "section-image-slider-wrapper",
+  "settings": [
+     {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+        {
+            "type": "columnimage",
+            "name": "column image",
+            "settings": [
+                {
+                "type": "image_picker",
+                "id": "image",
+                "label": "image"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "name": "text",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title_text",
+                    "default": "We Think Pink",
+                    "label": "Title"
+                },
+                {
+                    "type": "text",
+                    "id": "sub_title_text",
+                    "default": "La nostra Storia: vestire le Donne.",
+                    "label": "Sub Title"
+                },
+                {
+                    "type": "richtext",
+                    "id": "description",
+                    "label": "Description"
+                }
+            ]
+        }
+    ],
+  "presets": [
+    {
+      "name": "text with image slider",
+       "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "columnimage"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

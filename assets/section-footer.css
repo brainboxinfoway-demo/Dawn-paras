@@ -35,7 +35,7 @@
 
 @media screen and (min-width: 750px) {
   .footer__content-top .grid {
-    row-gap: 6rem;
+    column-gap: 6rem;
     margin-bottom: 0;
   }
 }
@@ -507,4 +507,24 @@
       padding-left: 3rem;
     }
   }
+}
+
+.footer_inner_wrapper {
+  display: flex;
+}
+
+.footer_inner_wrapper .footer__column {
+  align-items: flex-start !important;
+}
+
+.footer_inner_wrapper .footer__content-top {
+  order: 1;
+  width: 50%;
+  margin: 0;
+}
+
+.footer_inner_wrapper .footer__content-bottom {
+  padding: 0;
+  width: 50%;
+  border: 0;
 }
